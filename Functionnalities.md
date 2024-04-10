@@ -1,9 +1,9 @@
 ## System Performance Monitoring
 
-- Track CPU usage
-- Monitor memory usage
-- Monitor disk I/O
-- Track network traffic
+- Track CPU usage ( top , mpstat)
+- Monitor memory usage ( free -h , vmstat)
+- Monitor disk I/O ( iostat , iotop)
+- Track network traffic ( iftop nload)
 
 ## Security Monitoring
 

@@ -1,91 +1,116 @@
 #!/bin/bash
+source simple_curses.sh
 
-# Defining the functionalities classes
-
-# A class to monitor cpu usage / memory usage / disk I-O / network traffic
 system_performance_monitoring() {
-    echo "System Perfomance Monitoring"
+    selection="System Performance"
+    title1="CPU Usage"
+    title2="Memory Usage"
+    title3="Disk I/O"
+    title4="Network Traffic"
+    command1="mpstat"
+    command2="free -h"
+    command3="iostat"
+    command4="iftop"
 }
 
-# A class to monitor suspicious activity / authentications attemps / file integrity
 security_monitoring() {
-    echo "Security Monitoring"
+    selection="Security"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to monitor system up-time / service availability
 availability_monitoring() {
-    echo "Availability Monitoring"
+    selection="Availability"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to monitor ressource intensive processes / disk space usage
 resource_usage_monitoring() {
-    echo "Resource Usage Monitoring"
+    selection="Ressource Usage"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to monitor system logs and system events
 logs_events_monitoring() {
-    echo "Logs And Events Monitoring"
+    selection="Logs And Events"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to monitor user login-logout events / user activity
-user_activity_monitoring() {
-    echo "User Activity Monitoring"
-}
-
-# A class to monitor software updates and patches / checking for vulnerable packages
 software_patch_management() {
-    echo "Software Patch Management"
+    selection="Software And Patch Management"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to analyse long term performance trends / forecast future ressource requirements
 performance_trends_analysis() {
-    echo "Performance Trends Analysis"
+    selection="Performance Trends"
+    title1=""
+    title2=""
+    title3=""
+    title4=""
+    command1=""
+    command2=""
+    command3=""
+    command4=""
 }
 
-# A class to send alerts for critical events / notify administrators via e-mail
-alerting_notifications() {
-    echo "Alerts and Notifications"
+
+main(){
+
+    system_performance_monitoring;
+
+    window "Menu" "blue" "100%"
+        append "Current Selection: ${selection}"
+        addsep
+        append "1. System Performance 2. Security 3. Availability 4. Resource Usage 5. Logs And Events 6. User Activity 7. Software And Patch Management 8. Performance Trends Q. Exit"
+    endwin
+
+    window "$title1" "yellow" "100%"
+        append_command "$command1"
+    endwin
+
+    window "$title2" "yellow" "100%"
+        append_command "$command2"
+    endwin
+
+    window "$title3" "yellow" "100%"
+        append_command "$command3"
+    endwin
+
+    window "$title4" "yellow" "100%"
+        append_command "$command4"
+    endwin
 }
 
-# A class to automate the running of the script and data collection / analysis
-automation() {
-    echo "Automation"
-}
-
-# Main function to display menu and navigate between sections
-main() {
-
-    while true; do
-        clear
-        echo "Karys Monitoring Tool - Main Menu"
-        echo "1. System Performance Monitoring"
-        echo "2. Security Monitoring"
-        echo "3. Availability Monitoring"
-        echo "4. Resource Usage Monitoring"
-        echo "5. Logs And Events Monitoring"
-        echo "6. User Activity Monitoring"
-        echo "7. Software And Patch Management"
-        echo "8. Performance Trends Analysis"
-        echo "9. Alerting and Notifications"
-        echo "10. Automation"
-        echo "Q. Quit"
-        read -p "Enter your choice: " choice
-        case $choice in
-            1) system_performance_monitoring ;;
-            2) security_monitoring ;;
-            3) availability_monitoring ;;
-            4) resource_usage_monitoring ;;
-            5) logs_events_monitoring ;;
-            6) user_activity_monitoring ;;
-            7) software_patch_management ;;
-            8) performance_trends_analysis ;;
-            9) alerting_notifications ;;
-            10) automation ;;
-            q|Q) exit ;;
-            *) echo "Invalid option. Press any key to continue..." && read -n 1 -s -r ;;
-        esac
-        read -n 1 -s -r -p "Press any key to continue..."
-    done
-}
-
-main 
+main_loop

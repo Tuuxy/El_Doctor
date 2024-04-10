@@ -146,12 +146,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f255ab943029305c",
+  "active": "ee44abb8483609da",
   "lastOpenFiles": [
-    "eldoctor.sh",
-    "README.md",
-    "Functionnalities.md",
+    "simple_curses.sh",
     "Assignment.md",
+    "eldoctor.sh",
+    "el_doctor.sh",
+    "Functionnalities.md",
+    "backup.sh",
+    "test.sh",
+    "README.md",
     "Assets"
   ]
 }
