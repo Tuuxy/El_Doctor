@@ -148,14 +148,17 @@
   },
   "active": "ee44abb8483609da",
   "lastOpenFiles": [
+    "eldoctor.sh",
+    "eldoctor_paused.sh",
+    "choice.sh",
+    "Untitled.md",
+    "Functionnalities.md",
+    "README.md",
     "simple_curses.sh",
     "Assignment.md",
-    "eldoctor.sh",
     "el_doctor.sh",
-    "Functionnalities.md",
     "backup.sh",
     "test.sh",
-    "README.md",
     "Assets"
   ]
 }

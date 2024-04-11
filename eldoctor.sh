@@ -1,115 +1,42 @@
 #!/bin/bash
 source simple_curses.sh
 
-system_performance_monitoring() {
-    selection="System Performance"
-    title1="CPU Usage"
-    title2="Memory Usage"
-    title3="Disk I/O"
-    title4="Network Traffic"
-    command1="mpstat"
-    command2="free -h"
-    command3="iostat"
-    command4="iftop"
-}
-
-security_monitoring() {
-    selection="Security"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-availability_monitoring() {
-    selection="Availability"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-resource_usage_monitoring() {
-    selection="Ressource Usage"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-logs_events_monitoring() {
-    selection="Logs And Events"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-software_patch_management() {
-    selection="Software And Patch Management"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-performance_trends_analysis() {
-    selection="Performance Trends"
-    title1=""
-    title2=""
-    title3=""
-    title4=""
-    command1=""
-    command2=""
-    command3=""
-    command4=""
-}
-
-
 main(){
+    
 
-    system_performance_monitoring;
-
-    window "Menu" "blue" "100%"
-        append "Current Selection: ${selection}"
+    window "Karys System Monitoring Script" "green" "100%"
+        append_tabbed " User: $(whoami) = Hostname: $(hostname) = Date: $(date)" 3 "="
         addsep
-        append "1. System Performance 2. Security 3. Availability 4. Resource Usage 5. Logs And Events 6. User Activity 7. Software And Patch Management 8. Performance Trends Q. Exit"
+        append_tabbed "OS Informations - $(lsb_release -a | grep Description | awk -F: '{print $2}' | sed 's/^\s*//') = Kernel: $(uname -r) =  Architecture: $(uname -m)" 3 "="
+        append ""
     endwin
 
-    window "$title1" "yellow" "100%"
-        append_command "$command1"
+    window "CPU Usage" "yellow" "100%"
+        append "Uptime : $(uptime)"
+        addsep 
+        append "CPU Average Utilization: \n $(sar -P ALL 1 3 | grep -E '^Average' | awk '{print $1,$2,$3,$4,$5}')" 
+        addsep
+        append "Top 5 Processes: \n$(top -b -n 1 | awk 'NR==1 {print $1,$2,$9,$12} NR>7 {print $1,$2,$9,$12}' | sort -k3 -nr | head -n 5)"
     endwin
 
-    window "$title2" "yellow" "100%"
-        append_command "$command2"
+    window "Memory Usage" "yellow" "100%"
+        append "$(free -h)"
     endwin
 
-    window "$title3" "yellow" "100%"
-        append_command "$command3"
+    window "Disk I/O" "yellow" "100%"
+        append "$(iostat -d)"
+        addsep
+        append "Disk Usage: \n$(df -h | head -n 2)"
     endwin
 
-    window "$title4" "yellow" "100%"
-        append_command "$command4"
+    window "Network" "yellow" "100%"
+        append "$(ping -c 1 google.com &> /dev/null && echo "  Status: Connected" || echo "  Status: Disconnected")"
+        addsep
+        append "Socket Connections: $(ss -s)"
+    endwin
+
+    window "Service Availability" "yellow" "100%"
+        append_tabbed "SSH:$(systemctl is-active sshd)=DNS Bind Server:$(systemctl is-active named)=DHCP Server:$(systemctl is-active isc-dhcp-server)=Apache:$(systemctl is-active apache2)=MariaDB:$(systemctl is-active mariadb)" 5 "="
     endwin
 }
 
