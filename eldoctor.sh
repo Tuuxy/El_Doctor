@@ -1,9 +1,19 @@
 #!/bin/bash
 source simple_curses.sh
 
+collect_logs() {
+
+    # Create a dir to store logs if it does not exit
+    log_dir="/tmp/todays_logs"
+    mkdir -p "$log_dir"
+
+    # Copy today's logs to the log dir
+    cp /var/log/auth.log* /var/log/syslog* /var/log/kern.log* /var/log/ufw.log* /var/log/mail.log* /var/log/apache2/access.log* /var/log/apache2/error.log* "$log_dir"
+    echo "logs sent"
+}
+
 main(){
     
-
     window "Karys System Monitoring Script" "green" "100%"
         append_tabbed " User: $(whoami) = Hostname: $(hostname) = Date: $(date)" 3 "="
         addsep
@@ -38,6 +48,20 @@ main(){
     window "Service Availability" "yellow" "100%"
         append_tabbed "SSH:$(systemctl is-active sshd)=DNS Bind Server:$(systemctl is-active named)=DHCP Server:$(systemctl is-active isc-dhcp-server)=Apache:$(systemctl is-active apache2)=MariaDB:$(systemctl is-active mariadb)" 5 "="
     endwin
-}
 
-main_loop
+    window "User Activity" "yellow" "100%"
+        append "Today's Users:\n$(last | grep "$(date '+%a %b %e')")"
+        addsep
+        append "Root last commands: \n\n$(sudo tail -n 20 /root/.bash_history)"
+        addsep
+        append "Main User last commands: \n\n$(sudo tail -n 20 /home/karys/.bash_history)"
+    endwin
+
+    window "Press Ctrl + C to exit the script" "green" "100%"
+        append "A report will be sent at ${mail_address} !"
+    endwin
+
+ }
+
+collect_logs
+main_loop -t 5 
