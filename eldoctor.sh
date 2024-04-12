@@ -6,6 +6,9 @@ source simple_curses.sh
 # Change the mail address to receive the report here
 mail_address=""
 
+# Change the main user you want to track
+user="karys"
+
 command_list() {
     whoami
 
@@ -70,7 +73,7 @@ send_logs() {
     tar -czf /tmp/todays_logs.tar.gz -C /tmp todays_logs
 
     # Sending the mail
-    echo "El Doctor Report" | mail -s "El Doctor Report" -a /tmp/todays_logs.tar.gz $mail_address
+    echo "El Doctor Report" | mail -s "El Doctor Report" -A /tmp/todays_logs.tar.gz $mail_address
 
 }
 
@@ -114,9 +117,7 @@ main(){
     window "User Activity" "yellow" "100%"
         append "Today's Users:\n$(last | grep "$(date '+%a %b %e')")"
         addsep
-        append "Root last commands: \n\n$(sudo tail -n 20 /root/.bash_history)"
-        addsep
-        append "Main User last commands: \n\n$(sudo tail -n 20 /home/karys/.bash_history)"
+        append "Main User last commands: \n\n$(sudo tail -n 20 /home/$user/.bash_history)"
     endwin
 
     window "Press Ctrl + C to exit the script" "green" "100%"
