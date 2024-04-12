@@ -7,7 +7,7 @@ source simple_curses.sh
 mail_address=""
 
 # Change the main user you want to track
-user="karys"
+user=""
 
 command_list() {
     whoami

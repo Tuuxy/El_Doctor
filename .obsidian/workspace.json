@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Functionnalities.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Functionnalities.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Functionnalities.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Functionnalities.md"
+                "file": "README.md"
               }
             }
           }
@@ -148,6 +148,7 @@
   },
   "active": "ee44abb8483609da",
   "lastOpenFiles": [
+    "Assignment.md",
     "eldoctor.sh",
     "eldoctor_paused.sh",
     "choice.sh",
@@ -155,7 +156,6 @@
     "Functionnalities.md",
     "README.md",
     "simple_curses.sh",
-    "Assignment.md",
     "el_doctor.sh",
     "backup.sh",
     "test.sh",
