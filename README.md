@@ -100,3 +100,24 @@ sudo systemctl status postfix
 ```
 
 Now the script should be able to send a report to the specified e-mail ( in eldoctor.sh ) by using your gmail address on your terminal.
+
+### Automate the script with crontab
+
+You can force the script to run itself every day at a specified hour by using the cron linux service.
+
+```
+# Open crontab
+crontab -e
+
+# Add this line 
+0 23 * * * /path/to/eldoctor.sh
+```
+
+This will run the script everyday at 11 pm but you can configure as you want.
+The syntax is like this 
+
+```
+minute hour day_of_the_month month day_of_the_week
+
+* means every
+```
